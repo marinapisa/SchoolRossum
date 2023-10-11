@@ -1,8 +1,5 @@
-
-    <main>
-        <h1>
-            {{titulo}}
-        </h1>
+{% extends "template.html" %}
+{% block conteudo%}
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,5 +20,5 @@
                 {% endfor %}
             </tbody>
         </table>
-    </main>
+{% endblock %}  
     
