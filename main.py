@@ -48,4 +48,10 @@ def autenticar():
         flash("Senha incorreta, tente novamente!")
         redirect('/login')
 
+@app.route('/logout')
+def logout():
+    session['usuario_logado'] == None
+    flash('Você foi desconectado!')
+    return redirect("/login")
+
 app.run(debug=True)
