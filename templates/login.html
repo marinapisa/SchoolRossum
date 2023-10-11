@@ -19,12 +19,15 @@
     {% endwith %}
     <div class="container">
         <h1>Faca seu login</h1>
-        <form action="">
-            <p><label>Nome de Usuario</label>
-            <input type="text" name="usuario"></p>
+        <form action="{{ url_for('autenticar') }}" method="post">
+
+           
+
+            <p><label>Nome de Usuario:</label>
+            <input class="form-control" type="text" name="usuario" required></p>
             
-            <p><label>Senha de Usuario</label>
-            <input type="password" name="senha"></p>
+            <p><label>Senha:</label>
+                <input class="form-control" type="password" name="senha" required></p>
             <p><button class="btn btn-primary" type="submit">Entrar</button></p>
         </form>
     </div>

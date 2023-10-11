@@ -39,7 +39,7 @@ def criar():
 def login():
     return render_template('login.html', titulo = 'School Rossum')
 
-@app.route('/autenticar')
+@app.route('/autenticar', methods=['POST',])
 def autenticar():
     if '123456' == request.form['senha']:
         session['usuario_logado'] = request.form['usuario']
