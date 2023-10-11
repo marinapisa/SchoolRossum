@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session, flash
 from pessoa import Pessoa
 
 pessoa1 = Pessoa('Rodrigo', 32, 1.87)
@@ -10,6 +10,7 @@ pessoa5 = Pessoa('Elaine', 48, 1.82)
 lista = [pessoa1, pessoa2, pessoa3, pessoa4, pessoa5 ]
 
 app = Flask(__name__)
+app.secret_key = "123456"
 
 @app.route('/')
 def inicio():
@@ -33,5 +34,18 @@ def criar():
     
     lista.append(pessoas)
     return redirect('/')
+
+@app.route('/login')
+def login():
+    return render_template('login.html', titulo = 'School Rossum')
+
+@app.route('/autenticar')
+def autenticar():
+    if '123456' == request.form['senha']:
+        session['usuario_logado'] = request.form['usuario']
+        flash(session['usuario_logado'] + "Você está logado")
+    else:
+        flash("Senha incorreta, tente novamente!")
+        redirect('/login')
 
 app.run(debug=True)
