@@ -43,10 +43,11 @@ def login():
 def autenticar():
     if '123456' == request.form['senha']:
         session['usuario_logado'] = request.form['usuario']
-        flash(session['usuario_logado'] + "Você está logado")
+        flash(session['usuario_logado'] + " você está logado")
+        return redirect('/')
     else:
         flash("Senha incorreta, tente novamente!")
-        redirect('/login')
+        return redirect('/login')
 
 @app.route('/logout')
 def logout():
