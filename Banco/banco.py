@@ -14,16 +14,16 @@ if conn is not None:
     cursor.execute('''CREATE TABLE pessoa (
                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
                    nome VARCHAR(15) NOT NULL, 
-                   idade INTEGER NOT NULL, 
+                   idade VARCHAR(40) NOT NULL, 
                    altura VARCHAR(20) NOT NULL  
                    );''')
     print('Sua tabela de pessoas foi cadastrada')
-    cursor.execute('''CREATE TABLE usuarios (
-                   nome VARCHAR(15) NOT NULL, 
-                   nickname VARCHAR(30) PRIMARY KEY NOT NULL, 
-                   senha VARCHAR(30) NOT NULL  
+    cursor.execute('''CREATE TABLE Usuarios (
+                   nome VARCHAR(20) NOT NULL, 
+                   nickname VARCHAR(8) PRIMARY KEY NOT NULL, 
+                   senha VARCHAR(100) NOT NULL  
                    );''')
-    print('Sua tabela de usuarios foi cadastrada')
+    print('Sua tabela de Usuarios foi cadastrada')
 
     conn.commit()
     cursor.close()

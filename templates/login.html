@@ -19,7 +19,7 @@
     {% endwith %}
     <div class="container">
         <h1>Faca seu login</h1>
-        <form action="{{ url_for('autenticar') }}" method="post">
+        <form method="post" action="{{ url_for('autenticar') }}" >
             <input type="hidden" name="proximo" value="{{proximo or url_for('lista')}}">           
 
             <p><label>Nome de Usuario:</label>
