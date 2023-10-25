@@ -1,16 +1,24 @@
+#      1414             01          02          03      04      05      06
 from flask import render_template, request, redirect, session, flash, url_for
 from main import app, db
 from Models.pessoa import Pessoa
 from Models.usuario import Usuarios
+# CRUD
 
+# 1414 -
 @app.route('/')
 def inicio():
+    # READ
     lista = Pessoa.query.order_by(Pessoa.id)
+    # 1414 - 01
     return render_template('lista.html', titulo = 'Lista de Alunos', pessoas = lista)
 
+
+# 1414 -
 @app.route('/novo')
 def novo():
     if 'usuario_logado' not in session or session ['usuario_logado'] is None:
+        # 1414 - 03
         return redirect(url_for('login', proximo = url_for('novo')))
     return render_template('novo.html', titulo = 'Cadastro de Alunos')
 
@@ -96,3 +104,34 @@ def deletar(id):
     db.session.commit()
     flash('Pessoa deletada com sucesso!')
     return redirect(url_for('inicio'))
+
+@app.route('/registra')
+def registra():
+    return render_template('registra.html')
+
+@app.route('/registraUsuario', methods=['POST',])
+def registraUsuario():
+    nickname    = request.form.get('nickname')
+    nome        = request.form.get('nome')
+    senha       = request.form.get('senha')
+
+    existe_usuario = Usuarios.query.filter_by(nome=nome).count()
+
+    if existe_usuario > 0:
+        flash('Nome do usuario ja existe')
+        return render_template('registra.html')
+    
+    else:
+        try:
+            novo_usuario = Usuarios(nome=nome, nickname = nickname, senha = senha)
+            db.session.add(novo_usuario)
+            db.session.commit()
+            return redirect(url_for('login'))
+        except:
+            flash('erro ao cadastrar novo usuario')
+
+            return render_template('registra.html')
+
+
+
+    
